@@ -19,6 +19,12 @@ So I can store bookmark data for later retrieval
 I want to add a bookmark to Bookmark Manager
 ~~~~
 - Delete bookmarks
+~~~~
+As a user
+So I can remove my bookmark from Bookmark Manager
+I want to delete a bookmark
+~~~~
+
 - Update bookmarks
 - Comment on bookmarks
 - Tag bookmarks into categories

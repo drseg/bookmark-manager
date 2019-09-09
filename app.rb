@@ -3,6 +3,8 @@ require 'pg'
 require_relative './lib/bookmark'
 
 class BookmarkManager < Sinatra::Base
+  set :method_override, true
+
   get '/' do
     'Bookmark Manager'
   end
@@ -14,6 +16,10 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks/new' do
     erb :'bookmarks/new'
+  end
+
+  delete '/bookmarks/:id' do
+    Bookmark.delete(id: params['id'])
   end
 
   post '/bookmarks' do
