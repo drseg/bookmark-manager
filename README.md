@@ -24,10 +24,11 @@ I would like to add the site's address and title to bookmark manager
 
 ### To set up the database
 	
-Connect to `psql` and create the `bookmark_manager` database:
+Connect to `psql` and create the `bookmark_manager` databases:
 	
 ```
 CREATE DATABASE bookmark_manager;
+CREATE DATABASE bookmark_manager_test;
 ```
 	
 To set up the appropriate tables, connect to the database in `psql` and run the SQL scripts in the `db/migrations` folder in the given order.

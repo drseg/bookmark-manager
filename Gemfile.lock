@@ -61,6 +61,7 @@ GEM
     parallel (1.17.0)
     parser (2.5.3.0)
       ast (~> 2.4.0)
+    pg (1.1.4)
     procto (0.0.3)
     public_suffix (4.0.1)
     rack (2.0.7)
@@ -117,6 +118,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   mutant
+  pg
   rack-test
   rake
   rspec
