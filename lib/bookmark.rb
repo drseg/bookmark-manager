@@ -1,31 +1,35 @@
-require 'pg'
-
 class Bookmark
   attr_reader :title, :url, :id
 
   def self.all
-    result = connection.exec('SELECT * FROM bookmarks;')
-    result.map { |b| Bookmark.new(title: b['title'], url: b['url'], id: b['id']) }
+    result = DatabaseConnection.query('SELECT * FROM bookmarks;')
+    result.map do |b| 
+      Bookmark.new(title: b['title'],
+                   url: b['url'],
+                   id: b['id'])
+    end
   end
 
   def self.by_id(id)
-    result = connection.exec("SELECT * FROM bookmarks WHERE id = #{id};").first
+    result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = #{id};").first
     return if result.nil?
 
-    Bookmark.new(title: result['title'], url: result['url'], id: result['id'])
+    Bookmark.new(title: result['title'], 
+                 url: result['url'], 
+                 id: result['id'])
   end
 
   def self.create(title:, url:)
-    connection.exec("INSERT INTO bookmarks (title, url) VALUES ('#{title}', '#{url}')")
+    DatabaseConnection.query("INSERT INTO bookmarks (title, url) VALUES ('#{title}', '#{url}')")
     all.last
   end
 
   def self.update(id:, title:, url:)
-    connection.exec("UPDATE bookmarks SET TITLE = '#{title}', URL = '#{url}' WHERE id = #{id};")
+    DatabaseConnection.query("UPDATE bookmarks SET TITLE = '#{title}', URL = '#{url}' WHERE id = #{id};")
   end
 
   def self.delete(id:)
-    connection.exec("DELETE FROM bookmarks WHERE id = #{id};")
+    DatabaseConnection.query("DELETE FROM bookmarks WHERE id = #{id};")
   end
 
   def initialize(title:, url:, id:)
@@ -42,13 +46,5 @@ class Bookmark
 
   def state
     instance_variables.map { |v| instance_variable_get v }
-  end
-
-  private
-
-  def self.connection
-    db_name = ENV['ENVIRONMENT'] == 'test' ? 'bookmark_manager_test' : 'bookmark_manager'
-    @connection ||= PG.connect(dbname: db_name)
-    @connection
   end
 end
