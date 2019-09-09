@@ -7,7 +7,6 @@ feature 'Deleting bookmarks' do
     expect(page).to have_link(apple_title, href: apple_url)
 
     first('.bookmark').click_button 'Delete'
-    visit '/bookmarks'
     expect(page).not_to have_link(apple_title, href: apple_url)
   end
 end
