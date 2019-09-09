@@ -17,6 +17,11 @@ class Bookmark
 
   def self.create(title:, url:)
     connection.exec("INSERT INTO bookmarks (title, url) VALUES ('#{title}', '#{url}')")
+    all.last
+  end
+
+  def self.update(id:, title:, url:)
+    connection.exec("UPDATE bookmarks SET TITLE = '#{title}', URL = '#{url}' WHERE id = #{id};")
   end
 
   def self.delete(id:)

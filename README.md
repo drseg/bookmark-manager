@@ -24,8 +24,12 @@ As a user
 So I can remove my bookmark from Bookmark Manager
 I want to delete a bookmark
 ~~~~
-
 - Update bookmarks
+~~~~
+As a user
+So I can change a bookmark in Bookmark Manager
+I want to update a bookmark
+~~~~
 - Comment on bookmarks
 - Tag bookmarks into categories
 - Filter bookmarks by tag
