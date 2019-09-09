@@ -10,7 +10,7 @@ class Bookmark
     end
   end
 
-  def self.by_id(id)
+  def self.find(id)
     result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = #{id};").first
     return if result.nil?
 
@@ -36,6 +36,10 @@ class Bookmark
     @title = title
     @url = url
     @id = id
+  end
+
+  def comments(comment_class = Comment)
+    comment_class.where(id)
   end
 
   def ==(other)
