@@ -4,19 +4,52 @@ class User
   attr_reader :username, :id
 
   def self.create(username:, password:)
-    password = BCrypt::Password.create(password)
+    password = encrypt(password)
     result = DatabaseConnection.query("INSERT INTO users (username, password) VALUES('#{username}', '#{password}') RETURNING username, id;")
-    User.new(username: result[0]['username'], id: result[0]['id'])
+    User.new(username: username(from: result), id: id(from: result))
   end
 
   def self.find(id)
     return nil if id.nil?
 
-    result = DatabaseConnection.query("SELECT * FROM users WHERE id = '#{id}';")
-    User.new(username: result[0]['username'], id: result[0]['id'])
+    result = find_with_predicate("id = '#{id}'")
+    User.new(username: username(from: result), id: id(from: result))
+  end
+
+  def self.authenticate(username:, password:)
+    result = find_with_predicate("username = '#{username}'")
+    return nil if result.nil?
+
+    found_password = password(from: result)
+    return nil unless found_password == password
+
+    User.new(username: username(from: result), id: id(from: result))
   end
 
   private
+
+  def self.id(from:)
+    from[0]['id']
+  end
+
+  def self.username(from:)
+    from[0]['username']
+  end
+
+  def self.encrypt(password)
+    BCrypt::Password.create(password)
+  end
+
+  def self.password(from:)
+    BCrypt::Password.new(from[0]['password'])
+  end
+
+  def self.find_with_predicate(predicate)
+    result = DatabaseConnection.query("SELECT * FROM users WHERE #{predicate};")
+    return nil unless result.first
+
+    result
+  end
 
   def initialize(username:, id:)
     @username = username

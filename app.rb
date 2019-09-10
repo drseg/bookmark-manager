@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require 'pg'
 
 require_relative './lib/bookmark'
@@ -8,6 +9,7 @@ require_relative './database_connection_setup'
 class BookmarkManager < Sinatra::Base
   enable :method_override
   enable :sessions
+  register Sinatra::Flash
 
   get '/' do
     'Bookmark Manager'
@@ -69,8 +71,32 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(username: params['username'], password: params['password'])
+    user = User.create(username: params['username'],
+                       password: params['password'])
     session['user_id'] = user.id
+    redirect '/bookmarks'
+  end
+
+  get '/sessions/new' do
+    erb :'sessions/new'
+  end
+
+  post '/sessions' do
+    user = User.authenticate(username: params['username'],
+                             password: params['password'])
+
+    if user.nil?
+      flash[:notice] = 'Please check your email or password.'
+      redirect '/sessions/new'
+    else
+      session['user_id'] = user.id
+      redirect '/bookmarks'
+    end
+  end
+
+  post '/sessions/destroy' do
+    session.clear
+    flash[:notice] = 'You have signed out.'
     redirect '/bookmarks'
   end
 
