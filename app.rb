@@ -4,6 +4,8 @@ require 'pg'
 
 require_relative './lib/bookmark'
 require_relative './lib/comment'
+require_relative './lib/tag'
+require_relative './lib/user'
 require_relative './database_connection_setup'
 
 class BookmarkManager < Sinatra::Base

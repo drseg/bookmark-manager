@@ -3,7 +3,7 @@ class Bookmark
 
   def self.all
     result = DatabaseConnection.query('SELECT * FROM bookmarks;')
-    result.map do |b| 
+    result.map do |b|
       Bookmark.new(title: b['title'],
                    url: b['url'],
                    id: b['id'])
@@ -14,8 +14,8 @@ class Bookmark
     result = DatabaseConnection.query("SELECT * FROM bookmarks WHERE id = #{id};").first
     return if result.nil?
 
-    Bookmark.new(title: result['title'], 
-                 url: result['url'], 
+    Bookmark.new(title: result['title'],
+                 url: result['url'],
                  id: result['id'])
   end
 
