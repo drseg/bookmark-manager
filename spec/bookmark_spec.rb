@@ -53,12 +53,21 @@ describe Bookmark do
   end
 
   let(:comment_class) { double(:comment_class) }
+  let(:tag_class)     { double(:tag_class) }
 
   describe '#comments' do
     it 'calls .where on the Comment class' do
       apple = create_apple
       expect(comment_class).to receive(:where).with(apple.id)
       apple.comments(comment_class)
+    end
+  end
+
+  describe '#tags' do
+    it 'calls .where on the Comment class' do
+      apple = create_apple
+      expect(tag_class).to receive(:where).with(apple.id)
+      apple.tags(tag_class)
     end
   end
 end

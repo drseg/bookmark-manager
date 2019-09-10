@@ -42,6 +42,10 @@ class Bookmark
     comment_class.where(id)
   end
 
+  def tags(tag_class = Tag)
+    tag_class.where(id)
+  end
+
   def ==(other)
     other.class == self.class && other.state == state
   end

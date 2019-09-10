@@ -32,6 +32,11 @@ I want to update a bookmark
 ~~~~
 - Comment on bookmarks
 - Tag bookmarks into categories
+~~~~
+As a user
+So that I can categorize my bookmarks
+I want to add a Tag to a Bookmark
+~~~~
 - Filter bookmarks by tag
 - Users are restricted to manage only their own bookmarks
 
