@@ -6,7 +6,8 @@ require_relative './lib/comment'
 require_relative './database_connection_setup'
 
 class BookmarkManager < Sinatra::Base
-  set :method_override, true
+  enable :method_override
+  enable :sessions
 
   get '/' do
     'Bookmark Manager'
@@ -19,6 +20,7 @@ class BookmarkManager < Sinatra::Base
 
   get '/bookmarks' do
     @bookmarks = Bookmark.all
+    @user = User.find(session['user_id'])
     erb :'bookmarks/index'
   end
 
@@ -59,6 +61,16 @@ class BookmarkManager < Sinatra::Base
   post '/bookmarks/:id/tags' do
     tag = Tag.create(text: params['tag'])
     BookmarkTag.create(tag_id: tag.id, bookmark_id: params['id'])
+    redirect '/bookmarks'
+  end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    user = User.create(username: params['username'], password: params['password'])
+    session['user_id'] = user.id
     redirect '/bookmarks'
   end
 
