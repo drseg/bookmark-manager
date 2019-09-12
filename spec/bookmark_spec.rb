@@ -1,4 +1,4 @@
-require './lib/repository/bookmark_repository'
+require './lib/repositories/bookmark_repository'
 require './lib/entities/bookmark'
 require './spec/test_helpers'
 

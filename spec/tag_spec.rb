@@ -1,6 +1,6 @@
 require './lib/entities/tag'
-require './lib/repository/tag_repository'
-require './lib/repository/bookmark_tag_repository'
+require './lib/repositories/tag_repository'
+require './lib/repositories/bookmark_tag_repository'
 
 describe TagRepository do
   include_examples 'Test Helpers'

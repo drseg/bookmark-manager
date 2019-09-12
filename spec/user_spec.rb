@@ -1,5 +1,5 @@
 require './lib/entities/user'
-require './lib/repository/user_repository'
+require './lib/repositories/user_repository'
 require 'bcrypt'
 
 describe UserRepository do

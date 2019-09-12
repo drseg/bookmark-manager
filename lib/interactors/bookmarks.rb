@@ -1,6 +1,6 @@
 require_relative './interactor'
-require_relative '../repository/bookmark_repository'
-require_relative '../repository/user_repository'
+require_relative '../repositories/bookmark_repository'
+require_relative '../repositories/user_repository'
 require_relative '../views/bookmarks_view'
 require_relative '../views/new_bookmark_view'
 require_relative '../views/update_bookmark_view'

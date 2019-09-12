@@ -1,4 +1,4 @@
-require_relative '../repository/database_connection'
+require_relative '../repositories/database_connection'
 require_relative '../entities/comment'
 
 class CommentRepository

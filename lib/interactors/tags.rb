@@ -2,8 +2,8 @@ require_relative './interactor'
 require_relative '../views/new_tag_view'
 require_relative '../entities/tag'
 require_relative '../entities/bookmark_tag'
-require_relative '../repository/tag_repository'
-require_relative '../repository/bookmark_tag_repository'
+require_relative '../repositories/tag_repository'
+require_relative '../repositories/bookmark_tag_repository'
 
 class RequestNewTag < Interactor
   def execute

@@ -1,4 +1,4 @@
-require_relative '../repository/user_repository'
+require_relative '../repositories/user_repository'
 require_relative './interactor'
 require_relative '../views/new_user_view'
 

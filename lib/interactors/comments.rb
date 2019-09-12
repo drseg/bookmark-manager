@@ -1,7 +1,7 @@
 require_relative './interactor'
 require_relative '../entities/comment'
 require_relative '../views/new_comment_view'
-require_relative '../repository/comment_repository'
+require_relative '../repositories/comment_repository'
 
 class RequestNewComment < Interactor
   def execute

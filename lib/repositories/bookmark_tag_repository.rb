@@ -1,5 +1,5 @@
 require_relative '../entities/bookmark_tag'
-require_relative '../repository/database_connection'
+require_relative '../repositories/database_connection'
 
 class BookmarkTagRepository
   def self.create(tag_id:, bookmark_id:)

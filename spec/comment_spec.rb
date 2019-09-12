@@ -1,5 +1,5 @@
 require './lib/entities/comment'
-require './lib/repository/comment_repository'
+require './lib/repositories/comment_repository'
 require './spec/test_helpers'
 
 describe CommentRepository do

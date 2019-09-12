@@ -1,6 +1,6 @@
 require_relative './interactor'
 require_relative '../views/new_session_view'
-require_relative '../repository/user_repository'
+require_relative '../repositories/user_repository'
 
 class RequestNewSession < Interactor
   def execute
