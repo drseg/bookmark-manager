@@ -1,13 +1,14 @@
-require './lib/bookmark'
+require './lib/repository/bookmark_repository'
+require './lib/entities/bookmark'
 require './spec/test_helpers'
 
-describe Bookmark do
+describe BookmarkRepository do
   include_examples 'Test Helpers'
 
   describe '.all' do
     it 'returns all bookmarks' do
       created_apple = create_apple
-      apple = Bookmark.all.first
+      apple = BookmarkRepository.all.first
 
       expect(apple).to be_a Bookmark
       expect(apple.url).to eq apple_url
@@ -20,11 +21,11 @@ describe Bookmark do
   describe '.by_id' do
     it 'returns a specific bookmark matching the given id' do
       apple = create_apple
-      expect(Bookmark.find(apple.id)).to eq apple
+      expect(BookmarkRepository.find(apple.id)).to eq apple
     end
 
     it 'returns nil if bookmark not found' do
-      expect(Bookmark.find('0')).to be_nil
+      expect(BookmarkRepository.find('0')).to be_nil
     end
   end
 
@@ -33,12 +34,12 @@ describe Bookmark do
       apple = create_apple
       google = create_google
 
-      Bookmark.update(id: google.id, title: 'test', url: 'test')
-      expect(Bookmark.find(apple.id)).to eq apple
+      BookmarkRepository.update(id: google.id, title: 'test', url: 'test')
+      expect(BookmarkRepository.find(apple.id)).to eq apple
 
-      expect(Bookmark.find(google.id)).not_to eq google
-      expect(Bookmark.find(google.id).title).to eq 'test'
-      expect(Bookmark.find(google.id).url).to eq 'test'
+      expect(BookmarkRepository.find(google.id)).not_to eq google
+      expect(BookmarkRepository.find(google.id).title).to eq 'test'
+      expect(BookmarkRepository.find(google.id).url).to eq 'test'
     end
   end
 
@@ -47,8 +48,8 @@ describe Bookmark do
       apple = create_apple
       create_google
 
-      Bookmark.delete(id: apple.id)
-      expect(Bookmark.find(apple.id)).to be_nil
+      BookmarkRepository.delete(id: apple.id)
+      expect(BookmarkRepository.find(apple.id)).to be_nil
     end
   end
 

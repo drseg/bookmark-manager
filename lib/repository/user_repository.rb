@@ -1,8 +1,8 @@
 require 'bcrypt'
+require_relative '../repository/database_connection'
+require_relative '../entities/user'
 
-class User
-  attr_reader :username, :id
-
+class UserRepository
   def self.create(username:, password:)
     password = encrypt(password)
     result = DatabaseConnection.query("INSERT INTO users (username, password) VALUES('#{username}', '#{password}') RETURNING username, id;")
@@ -49,10 +49,5 @@ class User
     return nil unless result.first
 
     result
-  end
-
-  def initialize(username:, id:)
-    @username = username
-    @id = id
   end
 end

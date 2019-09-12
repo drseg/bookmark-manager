@@ -1,4 +1,4 @@
-require './lib/database_connection'
+require './lib/repository/database_connection'
 
 describe DatabaseConnection do
   describe '.setup' do

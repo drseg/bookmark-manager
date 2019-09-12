@@ -1,11 +1,12 @@
-require './lib/comment'
+require './lib/entities/comment'
+require './lib/repository/comment_repository'
 require './spec/test_helpers'
 
-describe Comment do
+describe CommentRepository do
   include_examples 'Test Helpers'
 
   let(:apple)   { create_apple }
-  let(:comment) { Comment.create(text: 'a comment', bookmark_id: apple.id) }
+  let(:comment) { CommentRepository.create(text: 'a comment', bookmark_id: apple.id) }
 
   before :each do
     comment
@@ -20,12 +21,12 @@ describe Comment do
 
   describe '.by_id' do
     it 'returns all comments matching the given bookmark id' do
-      expect(Comment.where(apple.id).first).to eq comment
+      expect(CommentRepository.where(apple.id).first).to eq comment
     end
 
     it 'returns nil if no comments found' do
-      comment = Comment.create(text: 'a comment', bookmark_id: apple.id)
-      expect(Comment.where('0')).to be_empty
+      comment = CommentRepository.create(text: 'a comment', bookmark_id: apple.id)
+      expect(CommentRepository.where('0')).to be_empty
     end
   end
 end

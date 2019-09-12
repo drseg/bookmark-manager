@@ -1,11 +1,12 @@
-require './lib/user'
+require './lib/entities/user'
+require './lib/repository/user_repository'
 require 'bcrypt'
 
-def create_test_user
-  User.create(username: 'user', password: 'password')
-end
+describe UserRepository do
+  def create_test_user
+    UserRepository.create(username: 'user', password: 'password')
+  end
 
-describe User do
   describe '.create' do
     it 'creates and returns a new user' do
       user = create_test_user
@@ -22,33 +23,33 @@ describe User do
   describe '.find' do
     it 'returns user by id' do
       user = create_test_user
-      retrieved_user = User.find(user.id)
+      retrieved_user = UserRepository.find(user.id)
       expect(retrieved_user).to eq retrieved_user
     end
 
     it 'returns nil if no id given' do
-      expect(User.find(nil)).to eq nil
+      expect(UserRepository.find(nil)).to eq nil
     end
   end
 
   describe '.authenticate' do
     it 'returns the user if authentication is successful' do
       user = create_test_user
-      authenticated_user = User.authenticate(username: 'user',
+      authenticated_user = UserRepository.authenticate(username: 'user',
                                              password: 'password')
       expect(authenticated_user.username).to eq user.username
     end
 
     it 'returns nil if user not found' do
       create_test_user
-      authenticated_user = User.authenticate(username: 'nil',
+      authenticated_user = UserRepository.authenticate(username: 'nil',
                                              password: 'password')
       expect(authenticated_user).to be_nil
     end
 
     it 'returns nil if password does not match' do
       create_test_user
-      authenticated_user = User.authenticate(username: 'user',
+      authenticated_user = UserRepository.authenticate(username: 'user',
                                              password: 'nil')
       expect(authenticated_user).to be_nil
     end

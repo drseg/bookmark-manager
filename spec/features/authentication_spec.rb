@@ -1,9 +1,9 @@
-require './lib/user'
-
+require './lib/entities/user'
+require './lib/repository/user_repository'
 
 feature 'Authentication' do
   def create_test_user
-    User.create(username: 'user', password: 'password')
+    UserRepository.create(username: 'user', password: 'password')
   end
 
   def sign_in(username, password)

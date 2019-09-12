@@ -12,8 +12,8 @@ feature 'Viewing bookmarks' do
 
     visit '/bookmarks'
 
-    apple = Bookmark.all.first
-    google = Bookmark.all.last
+    apple = BookmarkRepository.all.first
+    google = BookmarkRepository.all.last
 
     expect(page).to have_link(apple.title, href: apple.url)
     expect(page).to have_link(google.title, href: google.url)

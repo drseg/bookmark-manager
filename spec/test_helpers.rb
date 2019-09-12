@@ -7,10 +7,10 @@ shared_examples 'Test Helpers' do
   let(:google_title) { 'google title' }
 
   def create_apple
-    Bookmark.create(title: apple_title, url: apple_url)
+    BookmarkRepository.create(title: apple_title, url: apple_url)
   end
 
   def create_google
-    Bookmark.create(title: google_title, url: google_url)
+    BookmarkRepository.create(title: google_title, url: google_url)
   end
 end

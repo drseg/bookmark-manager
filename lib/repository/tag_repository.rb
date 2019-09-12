@@ -1,8 +1,7 @@
 require_relative './database_connection'
+require_relative '../entities/tag.rb'
 
-class Tag
-  attr_reader :text, :id
-
+class TagRepository
   def self.create(text:)
     result = DatabaseConnection.query("INSERT INTO tags (content) VALUES('#{text}') RETURNING id, content;")
     Tag.new(text: result[0]['content'], id: result[0]['id'])
@@ -13,20 +12,5 @@ class Tag
     result.map do |tag|
       Tag.new(text: tag['content'], id: tag['id'])
     end
-  end
-
-  def initialize(text:, id:)
-    @text = text
-    @id = id
-  end
-
-  def ==(other)
-    other.class == self.class && other.state == state
-  end
-
-  protected
-
-  def state
-    instance_variables.map { |v| instance_variable_get v }
   end
 end

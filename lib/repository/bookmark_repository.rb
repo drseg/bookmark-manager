@@ -1,6 +1,7 @@
-class Bookmark
-  attr_reader :title, :url, :id
+require_relative './database_connection'
+require_relative '../entities/bookmark'
 
+class BookmarkRepository
   def self.all
     result = DatabaseConnection.query('SELECT * FROM bookmarks;')
     result.map do |b|
@@ -30,29 +31,5 @@ class Bookmark
 
   def self.delete(id:)
     DatabaseConnection.query("DELETE FROM bookmarks WHERE id = #{id};")
-  end
-
-  def initialize(title:, url:, id:)
-    @title = title
-    @url = url
-    @id = id
-  end
-
-  def comments(comment_class = Comment)
-    comment_class.where(id)
-  end
-
-  def tags(tag_class = Tag)
-    tag_class.where(id)
-  end
-
-  def ==(other)
-    other.class == self.class && other.state == state
-  end
-
-  protected
-
-  def state
-    instance_variables.map { |v| instance_variable_get v }
   end
 end
